@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Agent Deposit- Enrolment</title>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <link href="css/general_style.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-primary sidebar-toggled">
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-7 col-md-7">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-2">Indentification</h1>
+                                        <p class="mb-5">Veillez renseigner les informations de l'agent</p>
+                                    </div>
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col">
+                                                <label for="id_tel">Opérateur</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>MTN</option>
+                                                    <option>Orange</option>
+                                                    <option>Moov</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="id_tel">N° Téléphone</label><br />
+                                                <input type="text" class="form-control form-control-user" id="id_tel" placeholder="">
+                                            </div>
+                                            <a href="index.html" class="btn btn-primary btn-user btn-block mt-4">Valider</a>
+                                        </div>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+</body>
+
+</html>
+<script>
+function getIp(callback) {
+    fetch('https://ipinfo.io/json?token=23ad0afe5b81f9', { headers: { 'Accept': 'application/json' } })
+        .then((resp) => resp.json())
+        .catch(() => {
+            return {
+                country: 'BJ',
+            };
+        })
+        .then((resp) => callback(resp.country));
+}
+
+const phoneInputField = document.querySelector("#id_tel");
+const phoneInput = window.intlTelInput(phoneInputField, {
+    preferredCountries: ["BJ", "CM", "CI", "TD"],
+    initialCountry: "auto",
+    geoIpLookup: getIp,
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+});
+
+const info = document.querySelector(".alert-info");
+
+function process(event) {
+    event.preventDefault();
+
+    const phoneNumber = phoneInput.getNumber();
+
+    info.style.display = "";
+    info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+}
+</script>

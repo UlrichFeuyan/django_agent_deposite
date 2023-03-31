@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Règlement par Chèque{% endblock title %}
+
+{% block special_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+{% endblock special_css %}
+
+{% block special_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src=" {% static 'js/international_phone_number.js' %} "></script>
+{% endblock special_js %}
+
+{% block sidebar %}
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'agent_deposit:home' %}">
+            <div class="sidebar-brand-text mx-3">AGENT DEPOSIT</div>
+        </a>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'agent_deposit:home' %}">
+                <i class="fas fa-home"></i>
+                <span>Accueil</span>
+            </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Heading -->
+        <div class="sidebar-heading">Transactions</div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Dépots</span>
+            </a>
+            <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modes de paiements</h6>
+                    <a class="collapse-item" href="{% url 'agent_deposit:liquide' %}">Versement Espèce</a>
+                    <a class="collapse-item" href="{% url 'agent_deposit:virement' %}">Virement</a>
+                    <a class="collapse-item active" href="{% url 'agent_deposit:cheque' %}">Remise Chèque</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'agent_deposit:retrait' %}">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Retraits</span>
+            </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Heading -->
+        <div class="sidebar-heading">Retracement</div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'agent_deposit:evenement' %}">
+                <i class="fas fa-history"></i>
+                <span>Évenements</span></a>
+        </li>
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'agent_deposit:historique' %}">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Historique</span></a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+    </ul>
+    <!-- End of Sidebar -->
+{% endblock sidebar %}
+
+{% block content %}
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Règlement par Chèque</h1>
+    <div class="row justify-content-center">
+        <div class="col-xl-5 col-lg-5 col-md-5">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-2">Indentification</h1>
+                                    <p class="mb-5">Veillez renseigner les informations de l'agent</p>
+                                </div>
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col">
+                                            <label for="id_tel">Opérateur</label>
+                                            <select id="inputState" class="form-control">
+                                                <option selected>MTN</option>
+                                                <option>Orange</option>
+                                                <option>Moov</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="id_tel">N° Téléphone</label><br />
+                                            <input type="text" class="form-control form-control-user" id="id_tel" placeholder="">
+                                        </div>
+                                        <a href="{% url 'agent_deposit:home' %}" class="btn btn-primary btn-user btn-block mt-4">Valider</a>
+                                    </div>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
