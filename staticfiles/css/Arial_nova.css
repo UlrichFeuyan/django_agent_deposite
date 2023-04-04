@@ -1,0 +1,146 @@
+{% load static %}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: url( '{% static "font/font_arial_nova/ArialNova-Bold.eot" %}');
+    src: local('Arial Nova Bold'), local('ArialNova-Bold'),
+        url( '{% static "font/font_arial_nova/ArialNova-Bold.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNova-Bold.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNova-Bold.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNova-Bold.ttf" %}') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: url( '{% static "font/font_arial_nova/ArialNova-Light.eot" %}');
+    src: local('Arial Nova Light'), local('ArialNova-Light'),
+        url( '{% static "font/font_arial_nova/ArialNova-Light.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNova-Light.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNova-Light.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNova-Light.ttf" %}') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova Cond';
+    src: url( '{% static "font/font_arial_nova/ArialNovaCond-Italic.eot" %}');
+    src: local('Arial Nova Cond Italic'), local('ArialNovaCond-Italic'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Italic.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Italic.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Italic.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Italic.ttf" %}') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: url( '{% static "font/font_arial_nova/ArialNova.eot" %}');
+    src: local('Arial Nova'), local('ArialNova'),
+        url( '{% static "font/font_arial_nova/ArialNova.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNova.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNova.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNova.ttf" %}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: url( '{% static "font/font_arial_nova/ArialNova-LightItalic.eot" %}');
+    src: local('Arial Nova Light Italic'), local('ArialNova-LightItalic'),
+        url( '{% static "font/font_arial_nova/ArialNova-LightItalic.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNova-LightItalic.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNova-LightItalic.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNova-LightItalic.ttf" %}') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Arial Nova Cond';
+    src: url( '{% static "font/font_arial_nova/ArialNovaCond-LightItalic.eot" %}');
+    src: local('Arial Nova Cond Light Italic'), local('ArialNovaCond-LightItalic'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-LightItalic.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-LightItalic.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-LightItalic.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-LightItalic.ttf" %}') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Arial Nova Cond';
+    src: url( '{% static "font/font_arial_nova/ArialNovaCond.eot" %}');
+    src: local('Arial Nova Cond'), local('ArialNovaCond'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond.ttf" %}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: url( '{% static "font/font_arial_nova/ArialNova-Italic.eot" %}');
+    src: local('Arial Nova Italic'), local('ArialNova-Italic'),
+        url( '{% static "font/font_arial_nova/ArialNova-Italic.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNova-Italic.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNova-Italic.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNova-Italic.ttf" %}') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Arial Nova Cond';
+    src: url( '{% static "font/font_arial_nova/ArialNovaCond-Bold.eot" %}');
+    src: local('Arial Nova Cond Bold'), local('ArialNovaCond-Bold'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Bold.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Bold.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Bold.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Bold.ttf" %}') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova Cond';
+    src: url( '{% static "font/font_arial_nova/ArialNovaCond-Light.eot" %}');
+    src: local('Arial Nova Cond Light'), local('ArialNovaCond-Light'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Light.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Light.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Light.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-Light.ttf" %}') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova Cond';
+    src: url( '{% static "font/font_arial_nova/ArialNovaCond-BoldItalic.eot" %}');
+    src: local('Arial Nova Cond Bold Italic'), local('ArialNovaCond-BoldItalic'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-BoldItalic.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-BoldItalic.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-BoldItalic.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNovaCond-BoldItalic.ttf" %}') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: url( '{% static "font/font_arial_nova/ArialNova-BoldItalic.eot" %}');
+    src: local('Arial Nova Bold Italic'), local('ArialNova-BoldItalic'),
+        url( '{% static "font/font_arial_nova/ArialNova-BoldItalic.eot?#iefix" %}') format('embedded-opentype'),
+        url( '{% static "font/font_arial_nova/ArialNova-BoldItalic.woff2" %}') format('woff2'),
+        url( '{% static "font/font_arial_nova/ArialNova-BoldItalic.woff" %}') format('woff'),
+        url( '{% static "font/font_arial_nova/ArialNova-BoldItalic.ttf" %}') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+

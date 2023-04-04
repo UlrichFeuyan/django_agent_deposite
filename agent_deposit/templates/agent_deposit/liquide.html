@@ -96,7 +96,8 @@
                                     <h1 class="h4 text-gray-900 mb-2">Indentification</h1>
                                     <p class="mb-5">Veillez renseigner les informations de l'agent</p>
                                 </div>
-                                <form>
+                                <form action="https://www.google.com/" method="GET">
+                                    {% csrf_token %}
                                     <div class="form-row">
                                         <div class="form-group col-4">
                                             <label for="id_tel">Opérateur</label>
@@ -110,10 +111,8 @@
                                             <label for="id_tel">N° Téléphone</label><br />
                                             <input type="text" class="form-control form-control-user" id="id_tel" placeholder="">
                                         </div>
-                                        <div class="col-md-12">
-                                            <a href="index.html" class="btn btn-primary btn-user btn-block mt-4">Valider</a>
-                                        </div>
                                     </div>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block mt-4">Valider le virement</button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
