@@ -1,3 +1,7 @@
 body{
     font-size: 1em;
 }
+
+#agentform{
+    min-width: 400px;
+}

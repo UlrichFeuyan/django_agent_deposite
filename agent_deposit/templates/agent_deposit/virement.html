@@ -85,7 +85,7 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Virement Bancaire</h1>
     <div class="row justify-content-center">
-        <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="fixed" id="agentform">
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
@@ -94,7 +94,7 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-2">Formulaire de virement bancaire</h1>
-                                    <p class="mb-4">Veuillez entrer les informations suivantes pour effectuer votre virement bancaire</p>
+                                    <p class="mb-4">Veuillez entrer les informations requises</p>
                                 </div>
                                 <form action="https://www.google.com/" method="GET">
                                     {% csrf_token %}
