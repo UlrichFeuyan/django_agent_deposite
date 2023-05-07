@@ -37,7 +37,6 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -113,8 +112,12 @@ if DB_ENGINE and DB_NAME and DB_USERNAME:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'expertizcore',
+            'USER': 'root',
+            'PASSWORD': 'torvplck',
+            'HOST': 'localhost',
+            'PORT': '3306',
         }
     }
 
@@ -152,8 +155,13 @@ USE_THOUSAND_SEPARATOR = True
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
+LOGIN_REDIRECT_URL = 'agent_deposit:home'
+
+LOGIN_URL = 'account:login'
+
+LOGOUT_REDIRECT_URL = 'account:login'
+
 X_FRAME_OPTIONS = "SAMEORIGIN"
-SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 ####################################
 ##  CKEDITOR CONFIGURATION        ##

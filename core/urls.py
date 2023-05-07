@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('agent_deposit.urls', namespace='agent_deposit')),
+    path('', include('account.urls', namespace='account')),
+    path('agent_deposit', include('agent_deposit.urls', namespace='agent_deposit')),
     path('admin/', admin.site.urls),
 ]
