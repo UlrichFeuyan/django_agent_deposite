@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from core import settings
 
 urlpatterns = [
     path('', include('account.urls', namespace='account')),
     path('agent_deposit', include('agent_deposit.urls', namespace='agent_deposit')),
     path('admin/', admin.site.urls),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "Administration AGENT DEPOSIT"
+admin.site.index_title = "Administration"
