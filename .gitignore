@@ -130,3 +130,4 @@ dmypy.json
 /models_from_db_expertizcore.py
 /README_test.md
 /agent_deposit/fixtures/
+.idea
