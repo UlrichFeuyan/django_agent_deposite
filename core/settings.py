@@ -153,11 +153,11 @@ USE_TZ = True
 
 USE_THOUSAND_SEPARATOR = True
 
-AUTH_USER_MODEL = 'account.CustomUser'
-
-LOGIN_REDIRECT_URL = 'agent_deposit:home'
+AUTH_USER_MODEL = 'agent_deposit.Utilisateur'
 
 LOGIN_URL = 'account:login'
+
+LOGIN_REDIRECT_URL = 'account:redirect_user'
 
 LOGOUT_REDIRECT_URL = 'account:login'
 

@@ -12,7 +12,25 @@ from django.views import View
 from django.views.generic import DetailView, CreateView
 
 from account.forms import LoginForm
-from account.models import CustomUser
+from agent_deposit.models import Utilisateur
+
+
+@login_required
+def redirect_user(request):
+    user_profile = request.user.CodeProfil.CodeProfil
+    try:
+        if user_profile == 'ADMIN':
+            return redirect('agent_deposit:admin_dashboard')
+        elif user_profile == 'CONTROL':
+            return redirect('agent_deposit:controller_dashboard')
+        elif user_profile == 'BACK':
+            return redirect('agent_deposit:back_office_dashboard')
+        elif user_profile == 'CAISSIER':
+            return redirect('agent_deposit:cashier_dashboard')
+        else:
+            return redirect('agent_deposit:home')
+    except:
+        pass
 
 
 class Login(LoginView):
@@ -36,6 +54,19 @@ class Login(LoginView):
         return context
 
 
+class Register(View):
+
+    def get(self, request, *args, **kwargs):
+        form = UserCreationForm()
+        return render(request, 'account/register.html', locals())
+
+    def post(self, request, *args, **kwargs):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('account:login')
+
+
 class ChangePassword(PasswordChangeView):
     template_name = "account/change-password.html"
     title = _("Modifier le mot de passe")
@@ -43,5 +74,5 @@ class ChangePassword(PasswordChangeView):
 
 
 class Profil(DetailView):
-    model = CustomUser
+    model = Utilisateur
     template_name_field = "account/profil.html"
