@@ -12,4 +12,11 @@ admin.site.register(Pays)
 admin.site.register(Sens)
 admin.site.register(Typetransaction)
 admin.site.register(Profil)
-admin.site.register(Utilisateur)
+
+
+@admin.register(Utilisateur)
+class UtilisateurAdmin(admin.ModelAdmin):
+    list_display = ['NomUser', 'IDUtilisateur', 'CodeUser', 'UserActif', 'CodeProfil']
+    list_filter = ['UserActif', 'CodeProfil']
+    list_select_related = True
+    prepopulated_fields = {"username": ("NomUser",)}

@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
-
+from django.views.generic import TemplateView, ListView
+from .models import *
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import Group
@@ -43,8 +43,10 @@ class Retrait(TemplateView):
     template_name = 'agent_deposit/retrait.html'
 
 
-class Evenement(TemplateView):
-    template_name = 'agent_deposit/evenement.html'
+class Evenement(ListView):
+    model = Evenements
+    template_name = 'agent_deposit/evenement.html'  # le template pour afficher la liste des Évènements
+    context_object_name = 'evenements'  # le nom de la variable contenant la liste des Évènements dans le contexte
 
 
 class Historique(TemplateView):

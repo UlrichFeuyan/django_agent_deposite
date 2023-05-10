@@ -9,8 +9,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from django.db.models.signals import post_save
+from django.db.transaction import commit
 from django.dispatch import receiver
 from django.contrib.auth.models import Group
+from django.utils.text import slugify
 
 SEXE_CHOICES = [
     ('masculin', 'Masculin'),
@@ -229,9 +231,9 @@ class Profil(models.Model):
 
 class Utilisateur(AbstractUser):
     IDUtilisateur = models.AutoField(db_column='IDUtilisateur', primary_key=True)
-    CodeUser = models.CharField(db_column='CodeUser', unique=True, max_length=10)
+    CodeUser = models.CharField(db_column='CodeUser', unique=True, max_length=100, blank=True, null=True)
     NomUser = models.CharField(db_column='NomUser', max_length=50, blank=True, null=True)
-    UserActif = models.IntegerField(db_column='UserActif', blank=True, null=True)
+    UserActif = models.BooleanField(db_column='UserActif', default=True)
     CodeProfil = models.ForeignKey(Profil, models.DO_NOTHING, db_column='CodeProfil', to_field='CodeProfil', blank=True,
                                    null=True)
 
@@ -244,10 +246,20 @@ class Utilisateur(AbstractUser):
     def __str__(self):
         return f"{self.NomUser}({self.UserActif})"
 
+    def save(self, *args, **kwargs):
+        if not self.username:
+            # fonction slugify pour transformer les espaces en tirets et les caractères accentués en caractères non-accentués
+            self.username = slugify(self.NomUser)
+        self.is_active = self.UserActif
+        if not self.CodeUser:
+            self.CodeUser = f"{self.CodeProfil.CodeProfil}_0{self.IDUtilisateur}"
+        super(Utilisateur, self).save(*args, **kwargs)
 
-@receiver(post_save, sender=Utilisateur)
-def add_user_to_group(sender, instance, created, **kwargs):
-    if created:
-        profile = instance.CodeProfil.CodeProfil
-        group, created = Group.objects.get_or_create(name=profile.CodeProfil)
-        instance.groups.add(group)
+        # Récupérer le groupe correspondant au profil de l'utilisateur
+        groupe, created = Group.objects.get_or_create(name=self.CodeProfil.CodeProfil)
+
+        # Ajouter l'utilisateur au groupe
+        self.groups.add(groupe)
+
+        # Appeler la méthode save de la classe parente pour enregistrer l'utilisateur dans la base de données
+        super().save(*args, **kwargs)

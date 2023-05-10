@@ -75,4 +75,9 @@ class ChangePassword(PasswordChangeView):
 
 class Profil(DetailView):
     model = Utilisateur
-    template_name_field = "account/profil.html"
+    template_name = "account/profil.html"
+    context_object_name = 'user'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

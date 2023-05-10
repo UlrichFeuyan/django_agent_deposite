@@ -5,7 +5,13 @@
 
 {% block content %}
     <div class="text-center">
-        <div class="error mx-auto" data-text="Contrôler">Contrôler</div>
+        <div class="error mx-auto" data-text="Controleur">Controleur</div>
         <p class="lead text-gray-800 mb-5">Page dédiée au Chargé des habilitations</p>
+        <p><br><br>
+        <ul>
+            <li>{{user.username}}</li>
+            <li>{{user.CodeProfil}}</li>
+        </ul>
+        </p>
     </div>
 {% endblock content %}
