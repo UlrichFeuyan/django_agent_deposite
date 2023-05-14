@@ -12,9 +12,9 @@ urlpatterns = [
     path('dashboard/back_office_dashboard/', BackOfficeDashboardView.as_view(), name='back_office_dashboard'),
     path('dashboard/cashier_dashboard/', CassierDashboardView.as_view(), name='cashier_dashboard'),
 
-    path('liquide/', Liquide.as_view(), name='liquide'),
+    path('liquide/', VersementEspece.as_view(), name='liquide'),
     path('virement/', Virement.as_view(), name='virement'),
-    path('cheque/', Cheque.as_view(), name='cheque'),
+    path('cheque/', RemiseCheque.as_view(), name='cheque'),
     path('retrait/', Retrait.as_view(), name='retrait'),
     path('evenement/', Evenement.as_view(), name='evenement'),
     path('historique/', Historique.as_view(), name='historique'),

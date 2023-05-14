@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, CreateView
 
-from account.forms import LoginForm
+from account.forms import LoginForm, RegisterForm
 from agent_deposit.models import Utilisateur
 
 
@@ -41,14 +41,12 @@ class Login(LoginView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         current_site = get_current_site(self.request)
-        messages.success(self.request, f'Connexion réussie !')
         context.update(
             {
                 self.redirect_field_name: self.get_redirect_url(),
                 "site": current_site,
                 "site_name": current_site.name,
                 **(self.extra_context or {}),
-                "messages": messages,
             }
         )
         return context
@@ -57,11 +55,11 @@ class Login(LoginView):
 class Register(View):
 
     def get(self, request, *args, **kwargs):
-        form = UserCreationForm()
+        form = RegisterForm()
         return render(request, 'account/register.html', locals())
 
     def post(self, request, *args, **kwargs):
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('account:login')

@@ -1,0 +1,84 @@
+<!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'agent_deposit:home' %}">
+            <div class="sidebar-brand-text mx-3">AGENT DEPOSIT</div>
+        </a>
+        {% if dashbord == 'True' %}
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item{% if dashbord_active == 'True' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'agent_deposit:home' %}">
+                    <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        {% endif %}
+        <!-- Heading -->
+        {% if transaction == 'True' %}
+            <div class="sidebar-heading">Transactions</div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            {% if dropdown_depots == 'True' %}
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Dépots</span>
+                </a>
+                <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+            {% else %}
+            <li class="nav-item">
+                <a aria-controls="collapseTwo" aria-expanded="false" class="nav-link collapsed" data-target="#collapseTwo" data-toggle="collapse"
+                   href="#">
+                    <i class="fas fa-money-check"></i>
+                    <span>Dépots</span>
+                </a>
+                <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordionSidebar" id="collapseTwo" style="">
+                    <div class="bg-white py-2 collapse-inner rounded">
+            {% endif %}
+                        <h6 class="collapse-header">Modes de paiements</h6>
+                        <a class="collapse-item{% if active_liquide == 'True' %} active{% endif %}" href="{% url 'agent_deposit:liquide' %}">Versement Espèce</a>
+                        <a class="collapse-item{% if active_virement == 'True' %} active{% endif %}" href="{% url 'agent_deposit:virement' %}">Virement</a>
+                        <a class="collapse-item{% if active_cheque == 'True' %} active{% endif %}" href="{% url 'agent_deposit:cheque' %}">Remise Chèque</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item{% if retrait_active == 'True' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'agent_deposit:retrait' %}">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Retraits</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        {% endif %}
+        {% if retracement == 'True' %}
+            <!-- Heading -->
+            <div class="sidebar-heading">Retracement</div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Charts -->
+            <li class="nav-item{% if evenement_active == 'True' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'agent_deposit:evenement' %}">
+                    <i class="fas fa-history"></i>
+                    <span>Évenements</span>
+                </a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item{% if historique_active == 'True' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'agent_deposit:historique' %}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Historique</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+        {% endif %}
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+    </ul>
+<!-- End of Sidebar -->

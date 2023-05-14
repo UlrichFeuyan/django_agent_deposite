@@ -228,6 +228,13 @@ class Profil(models.Model):
     def __str__(self):
         return self.CodeProfil
 
+    def to_dict(self):
+        return {
+            'IDProfil': self.IDProfil,
+            'CodeProfil': self.CodeProfil,
+            'DescriptionPro': self.DescriptionPro,
+        }
+
 
 class Utilisateur(AbstractUser):
     IDUtilisateur = models.AutoField(db_column='IDUtilisateur', primary_key=True)

@@ -49,25 +49,25 @@
                                   </div>
                                   <p>Veillez entrer les informations de l'utilisateur.</p>
                                   <form method="POST">
-                                      {% csrf_token %}
+                                    {% csrf_token %}
 
-                                      {% for field in form.visible_fields %}
-                                      <div class="form-group">
-                                          <label for="{{field.id_for_label}}">{{ field.label }}</label>
-                                          {% if field.help_text %}
-                                            <small class="form-text text-muted">{{ field.help_text }}</small>
-                                          {% endif %}
+                                    {% for field in form.visible_fields %}
+                                    <div class="form-group">
+                                        <label for="{{field.id_for_label}}">{{ field.label }}</label>
+                                        {% if field.help_text %}
+                                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                                        {% endif %}
 
-                                          {{ field }}
+                                        {{ field }}
 
-                                          {% for error in field.errors %}
-                                          <div class="invalid-feedback">{{ error }}</div>
-                                          {% endfor %}
-                                      </div>
-                                      {% endfor %}
-                                      <button class="btn btn-primary btn-user btn-block mt-4" type="submit">Valider
-                                      </button>
-                                  </form>
+                                        {% for error in field.errors %}
+                                        <div class="invalid-feedback">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    <button class="btn btn-primary btn-user btn-block mt-4" type="submit">Valider
+                                    </button>
+                                </form>
                                   <hr>
                               </div>
                           </div>

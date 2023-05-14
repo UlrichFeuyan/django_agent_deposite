@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
+    'debug_toolbar',
 
     'account.apps.AccountConfig',
     'agent_deposit.apps.AgentDepositConfig',
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -82,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'agent_deposit.context_processors.profil_context_processor',
             ],
         },
     },
@@ -162,6 +165,11 @@ LOGIN_REDIRECT_URL = 'account:redirect_user'
 LOGOUT_REDIRECT_URL = 'account:login'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 
 ####################################
 ##  CKEDITOR CONFIGURATION        ##
