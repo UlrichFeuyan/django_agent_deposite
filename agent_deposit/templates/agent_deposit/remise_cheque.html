@@ -27,7 +27,7 @@
                                     <h1 class="h4 text-gray-900 mb-2">Indentification</h1>
                                     <p class="mb-5">Veillez renseigner les informations de l'agent</p>
                                 </div>
-                                <form action="https://www.google.com/" method="GET">
+                                <form method="POST">
                                     {% csrf_token %}
                                     <div class="form-row">
                                         <div class="form-group col-4">
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="code-banque">N° de cheque</label>
-                                        <input type="text" class="form-control form-control-user" id="code-banque" name="code_banque" placeholder="Entrez le numéro du chèque" disabled>
+                                        <input type="text" class="form-control form-control-user" id="code-banque" placeholder="Entrez le numéro du chèque" name="num_cheque">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block mt-4">Valider</button>
                                 </form>

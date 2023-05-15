@@ -27,12 +27,12 @@
                                     <h1 class="h4 text-gray-900 mb-2">Formulaire de virement bancaire</h1>
                                     <p class="mb-4">Veuillez entrer les informations requises</p>
                                 </div>
-                                <form action="https://www.google.com/" method="GET">
+                                <form method="POST">
                                     {% csrf_token %}
                                     <div class="form-row">
                                         <div class="form-group col-4">
                                             <label for="id_tel">Opérateur</label>
-                                            <select id="inputState" class="form-control">
+                                            <select id="inputState" class="form-control" name="operateur">
                                                 <option selected>MTN</option>
                                                 <option>Orange</option>
                                                 <option>Moov</option>
@@ -40,21 +40,21 @@
                                         </div>
                                         <div class="form-group col ml-3">
                                             <label for="id_tel">N° Téléphone</label><br />
-                                            <input type="text" class="form-control form-control-user" id="id_tel" placeholder="">
+                                            <input type="text" class="form-control form-control-user" id="id_tel" placeholder="" name="telephone">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="code-banque">Code de la Banque</label>
-                                        <input type="text" class="form-control form-control-user" id="code-banque" name="code_banque" placeholder="Entrez le code de la Banque" disabled>
+                                        <input type="text" class="form-control form-control-user" id="code-banque" placeholder="Entrez le code de la Banque" name="code_banque">
                                     </div>
                                     <div class="form-group">
                                         <label for="code-agence">Code de l'agence</label>
-                                        <input type="text" class="form-control form-control-user" id="code-agence" name="code_agence" placeholder="Entrez le code de l'agence" disabled>
+                                        <input type="text" class="form-control form-control-user" id="code-agence" placeholder="Entrez le code de l'agence" name="code_agence">
                                     </div>
                                     <div class="form-group">
                                         <label for="montant">Montant de la transaction</label>
                                         <div class="input-group">
-                                            <input type="text" min="0" class="form-control form-control-user" id="montant" name="montant" placeholder="Entrez le montant de la transaction" disabled>
+                                            <input type="text" min="0" class="form-control form-control-user" id="montant" placeholder="Entrez le montant de la transaction" name="montant">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">XOF</span>
                                             </div>
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="identifiant-receveur">Identifiant du receveur</label>
-                                        <input type="text" class="form-control form-control-user" id="identifiant-receveur" name="identifiant_receveur" placeholder="Entrez l'identifiant du receveur" disabled>
+                                        <input type="text" class="form-control form-control-user" id="identifiant-receveur" placeholder="Entrez l'identifiant du receveur" name="identifiant_receveur">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block mt-4">Valider</button>
                                 </form>

@@ -10,7 +10,9 @@
     <meta content="" name="description">
     <meta content="" name="author">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Agent Deposit - Connexion</title>
+
+    <link href="{% static 'img/favicon.png' %}" rel="icon" type="image/png">
 
     <!-- Custom fonts for this template-->
     <link href=" {% static 'vendor/fontawesome-free/css/all.min.css' %} " rel="stylesheet" type="text/css">
@@ -26,16 +28,29 @@
             background-size:cover;
         }
 
+        body{ height: 100%;}
+
+        .bottom-mockup{
+            margin: 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0px;
+            right: -4%;
+        }
+
     </style>
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="theme-layout gray-bg vh-100">
 
 <div class="container">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
+        <div class="logo-up mt-4">
+            <figure class="logo"><img alt="" src="{% static 'img/logo.png' %}" width="200px"><span></span></figure>
+        </div>
 
         <div class="col-xl-10 col-lg-12 col-md-9">
 
@@ -45,42 +60,44 @@
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block bg-log-image"></div>
                         <div class="col-lg-6">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Bienvenue</h1>
-                                </div>
-                                {% if messages %}
-                                    <ul class="messages">
-                                        {% for message in messages %}
-                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                                            {{ message }}
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                                <form method="POST">
-                                    {% csrf_token %}
-
-                                    {% for field in form.visible_fields %}
-                                    <div class="form-group">
-                                        <label for="{{field.id_for_label}}">{{ field.label }}</label>
-                                        {% if field.help_text %}
-                                        <small class="form-text text-muted">{{ field.help_text }}</small>
-                                        {% endif %}
-
-                                        {{ field }}
-
-                                        {% for error in field.errors %}
-                                        <div class="invalid-feedback">{{ error }}</div>
-                                        {% endfor %}
+                            {% block content %}
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Bienvenue</h1>
                                     </div>
-                                    {% endfor %}
-                                    <button class="btn btn-primary btn-user btn-block mt-4" type="submit">Connexion
-                                    </button>
-                                </form>
-                                <hr>
-                            </div>
+                                    {% if messages %}
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                                {{ message }}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                    <form method="POST">
+                                        {% csrf_token %}
+
+                                        {% for field in form.visible_fields %}
+                                        <div class="form-group">
+                                            <label for="{{field.id_for_label}}">{{ field.label }}</label>
+                                            {% if field.help_text %}
+                                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                                            {% endif %}
+
+                                            {{ field }}
+
+                                            {% for error in field.errors %}
+                                            <div class="invalid-feedback">{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                        {% endfor %}
+                                        <button class="btn btn-primary btn-user btn-block mt-4" type="submit">Connexion
+                                        </button>
+                                    </form>
+                                    <hr>
+                                </div>
+                            {% endblock %}
                         </div>
                     </div>
                 </div>
@@ -91,7 +108,7 @@
     </div>
 
 </div>
-
+<figure class="bottom-mockup"><img alt="" src="{% static 'img/footer.png' %}"></figure>
 <!-- Bootstrap core JavaScript-->
 <script src=" {% static 'vendor/jquery/jquery.min.js' %} "></script>
 <script src=" {% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
@@ -103,5 +120,4 @@
 <script src=" {% static 'js/sb-admin-2.min.js' %} "></script>
 
 </body>
-
 </html>

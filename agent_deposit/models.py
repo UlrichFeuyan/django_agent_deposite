@@ -77,7 +77,7 @@ class Comptes(models.Model):
 class Evenements(models.Model):
     IDevenements = models.BigAutoField(db_column='IDevenements', primary_key=True)
     montant = models.DecimalField(max_digits=24, decimal_places=6, blank=True, null=True)
-    refOrig = models.CharField(db_column='refOrig', max_length=50, blank=True, null=True)
+    refOrig = models.CharField(db_column='refOrig', max_length=50, blank=True, null=True)  # voucher
     natOrig = models.ForeignKey('Typetransaction', models.DO_NOTHING, db_column='natOrig', to_field='CodeType',
                                 blank=True, null=True)
     DoOrig = models.CharField(db_column='DoOrig', max_length=50, blank=True, null=True)
