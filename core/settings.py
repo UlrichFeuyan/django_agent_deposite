@@ -100,7 +100,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-"""
 DB_ENGINE = os.getenv('DB_ENGINE', None)
 DB_USERNAME = os.getenv('DB_USERNAME', None)
 DB_PASS = os.getenv('DB_PASS', None)
@@ -135,6 +134,7 @@ else:
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
 }
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
