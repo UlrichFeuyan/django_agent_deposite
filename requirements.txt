@@ -5,7 +5,7 @@ charset-normalizer==3.1.0
 djangify==1.0.0
 Django==3.2.19
 django-admin-interface==0.19.1
-django-ckeditor==6.5.1
+django-ckeditor==6.3.2
 django-colorfield==0.8.0
 django-debug-toolbar==4.0.0
 django-flat-responsive==2.0
