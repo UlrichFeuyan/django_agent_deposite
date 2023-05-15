@@ -254,19 +254,22 @@ class Utilisateur(AbstractUser):
         return f"{self.NomUser}({self.UserActif})"
 
     def save(self, *args, **kwargs):
-        if not self.username:
-            # fonction slugify pour transformer les espaces en tirets et les caractères accentués en caractères non-accentués
-            self.username = slugify(self.NomUser)
-        self.is_active = self.UserActif
-        if not self.CodeUser:
-            self.CodeUser = f"{self.CodeProfil.CodeProfil}_0{self.IDUtilisateur}"
-        super(Utilisateur, self).save(*args, **kwargs)
+        try:
+            if not self.username:
+                # fonction slugify pour transformer les espaces en tirets et les caractères accentués en caractères non-accentués
+                self.username = slugify(self.NomUser)
+            self.is_active = self.UserActif
+            if not self.CodeUser:
+                self.CodeUser = f"{self.CodeProfil.CodeProfil}_0{self.IDUtilisateur}"
+            super(Utilisateur, self).save(*args, **kwargs)
 
-        # Récupérer le groupe correspondant au profil de l'utilisateur
-        groupe, created = Group.objects.get_or_create(name=self.CodeProfil.CodeProfil)
+            # Récupérer le groupe correspondant au profil de l'utilisateur
+            groupe, created = Group.objects.get_or_create(name=self.CodeProfil.CodeProfil)
 
-        # Ajouter l'utilisateur au groupe
-        self.groups.add(groupe)
+            # Ajouter l'utilisateur au groupe
+            self.groups.add(groupe)
 
-        # Appeler la méthode save de la classe parente pour enregistrer l'utilisateur dans la base de données
-        super().save(*args, **kwargs)
+            # Appeler la méthode save de la classe parente pour enregistrer l'utilisateur dans la base de données
+            super().save(*args, **kwargs)
+        except:
+            pass

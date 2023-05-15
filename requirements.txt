@@ -2,12 +2,14 @@ asgiref
 attrs
 certifi
 charset-normalizer
+dj-database-url
 djangify
-django
+Django
 django-admin-interface
 django-ckeditor
 django-colorfield
 django-debug-toolbar
+django-environ
 django-flat-responsive
 django-flat-theme
 django-js-asset
@@ -26,6 +28,7 @@ requests-file
 requests-toolbelt
 six
 sqlparse
+typing_extensions
 urllib3
 whitenoise
 zeep

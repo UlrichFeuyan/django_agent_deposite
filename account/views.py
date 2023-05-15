@@ -6,10 +6,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, TemplateView
 
 from account.forms import LoginForm, RegisterForm
 from agent_deposit.models import Utilisateur
@@ -65,17 +66,14 @@ class Register(View):
             return redirect('account:login')
 
 
+@method_decorator(login_required, name='dispatch')
 class ChangePassword(PasswordChangeView):
     template_name = "account/change-password.html"
     title = _("Modifier le mot de passe")
     success_url = reverse_lazy("account:profil")
 
 
-class Profil(DetailView):
-    model = Utilisateur
-    template_name = "account/profil.html"
-    context_object_name = 'user'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+@login_required
+def profil(request):
+    context = {'user': request.user}
+    return render(request, 'account/profil.html', context)

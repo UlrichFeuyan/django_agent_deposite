@@ -7,9 +7,6 @@ app_name = 'agent_deposit'
 urlpatterns = [
     path('', Home.as_view(), name='home'),
 
-    path('dashboard/admin_dashboard/', AdminDashboardView.as_view(), name='admin_dashboard'),
-    path('dashboard/controller_dashboard/', ControllerDashboardView.as_view(), name='controller_dashboard'),
-    path('dashboard/back_office_dashboard/', BackOfficeDashboardView.as_view(), name='back_office_dashboard'),
     path('dashboard/cashier_dashboard/', CassierDashboardView.as_view(), name='cashier_dashboard'),
 
     path('liquide/', VersementEspece.as_view(), name='liquide'),

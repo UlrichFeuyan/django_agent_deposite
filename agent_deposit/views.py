@@ -2,7 +2,7 @@ from datetime import datetime
 import random
 
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView
@@ -28,33 +28,6 @@ def is_caissier(user):
 
 
 @method_decorator(login_required, name='dispatch')
-class AdminDashboardView(LoginRequiredMixin, TemplateView):
-    template_name = 'agent_deposit/dashboards/admin_dashboard.html'
-
-    @method_decorator(user_passes_test(is_admin, login_url='account:login'))
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-
-@method_decorator(login_required, name='dispatch')
-class ControllerDashboardView(LoginRequiredMixin, TemplateView):
-    template_name = 'agent_deposit/dashboards/controller_dashboard.html'
-
-    @method_decorator(user_passes_test(is_control, login_url='account:login'))
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-
-@method_decorator(login_required, name='dispatch')
-class BackOfficeDashboardView(LoginRequiredMixin, TemplateView):
-    template_name = 'agent_deposit/dashboards/back_office_dashboard.html'
-
-    @method_decorator(user_passes_test(is_back, login_url='account:login'))
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-
-@method_decorator(login_required, name='dispatch')
 class CassierDashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'agent_deposit/dashboards/caissier_dashboard.html'
 
@@ -77,8 +50,12 @@ class Home(TemplateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class VersementEspece(TemplateView):
+class VersementEspece(TemplateView, UserPassesTestMixin):
     template_name = 'agent_deposit/versement_espece.html'
+
+    @method_decorator(user_passes_test(is_caissier, login_url=''))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         # Récupérer les données du formulaire
