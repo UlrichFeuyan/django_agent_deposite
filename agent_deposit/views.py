@@ -1,15 +1,14 @@
+from datetime import datetime
+import random
+
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.views.generic import TemplateView, ListView
 
 from SoapAPI.test_soap_api_call import callApi
 from .models import *
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.contrib.auth.models import Group
-from .models import Utilisateur, Profil
 
 
 def is_admin(user):
@@ -87,33 +86,41 @@ class VersementEspece(TemplateView):
         telephone = request.POST.get('telephone')
 
         # Appeler l'API SOAP
-        parametre = telephone[:3]  # valeur d'entrée; température en Fahrenheit
+        parametre = random.randrange(999)  # valeur d'entrée; température en Fahrenheit
         print(parametre)
         url = 'https://www.w3schools.com/xml/tempconvert.asmx'  # URL de l'endpoint
         namespace = 'https://www.w3schools.com/xml/'  # namespace
         action = 'FahrenheitToCelsius'  # fonction à appeler
 
         response = callApi(url, namespace, action, parametre)
-        print(response)
+        if response:
+            transaction_type = Typetransaction.objects.get(CodeType="VERSP")
+            sens = Sens.objects.get(CodeSens="C")
+            operateur_code = Operateur.objects.get(CodeOperateur=operateur)
+            agent, agent_exist = Agent.objects.get_or_create(CodeOperateur=operateur_code, msisdn="+229" + telephone)
+            voucher = operateur + telephone + datetime.now().strftime('%d%m%Y%H%M')
+            # Créer une instance du modèle Evenement avec les données de la réponse
+            evenement = Evenements.objects.create(
+                montant=int(float(response)) * 742,
+                refOrig=voucher,
+                natOrig=transaction_type,
+                BenOrig='999999898',
+                userOrig=request.user,
+                DoFin='test',
+                sensOrig=sens,
+                statutTrt='0',
+                CodeOperateur=operateur_code,
+                Msisdn=agent,
+                cptOPERSide=response,
+            )
+            evenement.save()
 
-    #        Vérifier que la réponse de l'API est valide
-    #        if response.status_code == 200:
-    #            # Créer une instance du modèle Evenement avec les données de la réponse
-    #            data = response.json()
-    #            evenement = Evenement.objects.create(
-    #                champ1=data['champ1'],
-    #                champ2=data['champ2'],
-    #                champ3=data['champ3'],
-    #            )
-    #            evenement.save()
-    #
-    #            # Rediriger vers une page de confirmation
-    #            return render(request, 'confirmation.html', {'evenement': evenement})
-    #
-    #        # Si la réponse de l'API est invalide, afficher une erreur
-    #        else:
-    #            error_msg = 'Erreur lors de l\'appel à l\'API'
-    #            return render(request, self.template_name, {'error_msg': error_msg})
+            # Rediriger vers une page de confirmation
+            return redirect('agent_deposit:evenement')
+        # Si la réponse de l'API est invalide, afficher une erreur
+        else:
+            error_msg = 'Erreur lors de l\'appel à l\'API'
+            return render(request, self.template_name, {'error_msg': error_msg})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

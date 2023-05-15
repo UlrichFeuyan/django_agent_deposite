@@ -3,7 +3,7 @@ attrs==23.1.0
 certifi==2023.5.7
 charset-normalizer==3.1.0
 djangify==1.0.0
-Django==4.1.7
+Django==3.2.19
 django-admin-interface==0.19.1
 django-ckeditor==6.5.1
 django-colorfield==0.8.0
