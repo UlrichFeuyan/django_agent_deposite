@@ -13,6 +13,7 @@ django-environ
 django-flat-responsive
 django-flat-theme
 django-js-asset
+django-widget-tweaks
 gunicorn
 idna
 isodate
