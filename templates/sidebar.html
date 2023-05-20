@@ -18,6 +18,19 @@
             <hr class="sidebar-divider">
         {% endif %}
         <!-- Heading -->
+        {% if ges_utilisateur == 'True' %}
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item{% if dashbord_active == 'True' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'account:users' %}">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Utilisateurs</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        {% endif %}
         {% if transaction == 'True' %}
             <div class="sidebar-heading">Transactions</div>
             <!-- Nav Item - Pages Collapse Menu -->

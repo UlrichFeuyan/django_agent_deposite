@@ -22,6 +22,7 @@ side_bar_back_office = {
 
 side_bar_controleur = {
     # permet d'afficher le menu des vues des des transactions sur la journée et l'historique des opérations
+    'ges_utilisateur': 'True',
     'retracement': 'True',
 }
 

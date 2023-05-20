@@ -1,0 +1,47 @@
+{% load widget_tweaks %}
+{% with WIDGET_ERROR_CLASS='is-invalid' %}
+<form class="modal-content" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' hx-post="{{ request.path }}">
+    <div class="modal-header">
+        {% if utilisateur %}
+            <h5 class="modal-title">Modifier l'utilisateur</h5>
+        {% else %}
+            <h5 class="modal-title">Ajouter un utilisateur</h5>
+        {% endif %}
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label class="form-label" for="{{ form.CodeUser.id_for_label }}">Code Utilisateur</label>
+            {% render_field form.CodeUser %}
+            <div class="invalid-feedback">{{ form.CodeUser.errors|first }}</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="{{ form.NomUser.id_for_label }}">Nom</label>
+            {% render_field form.NomUser %}
+            <div class="invalid-feedback">{{ form.NomUser.errors|first }}</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="{{ form.email.id_for_label }}">E-mail</label>
+            {% render_field form.email %}
+            <div class="invalid-feedback">{{ form.email.errors|first }}</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="{{ form.CodeProfil.id_for_label }}">Profil</label>
+            {% render_field form.CodeProfil %}
+            <div class="invalid-feedback">{{ form.CodeProfil.errors|first }}</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        {% if utilisateur %}
+        <button class="btn btn-danger" hx-post="{% url 'account:remove_user' pk=utilisateur.CodeUser %}" type="button">
+            Supprimer
+        </button>
+        <span class="flex-grow-1"></span>
+        {% endif %}
+        <button class="btn btn-secondary" data-dismiss="modal" type="button">Annuler</button>
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+    </div>
+</form>
+{% endwith %}

@@ -5,6 +5,8 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the True
 # Feel free to rename the models, but don't rename db_table values or field names.
+import secrets
+import string
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -13,11 +15,7 @@ from django.db.transaction import commit
 from django.dispatch import receiver
 from django.contrib.auth.models import Group
 from django.utils.text import slugify
-
-SEXE_CHOICES = [
-    ('masculin', 'Masculin'),
-    ('feminin', 'Féminin'),
-]
+from django.core.mail import send_mail
 
 
 class Agent(models.Model):
@@ -254,22 +252,37 @@ class Utilisateur(AbstractUser):
         return f"{self.NomUser}({self.UserActif})"
 
     def save(self, *args, **kwargs):
-        try:
-            if not self.username:
-                # fonction slugify pour transformer les espaces en tirets et les caractères accentués en caractères non-accentués
-                self.username = slugify(self.NomUser)
-            self.is_active = self.UserActif
-            if not self.CodeUser:
-                self.CodeUser = f"{self.CodeProfil.CodeProfil}_0{self.IDUtilisateur}"
-            super(Utilisateur, self).save(*args, **kwargs)
+        self.groups.clear()  # retire l'utilisateur de tous les groupes
+        if not self.username:
+            # fonction slugify pour transformer les espaces en tirets et les caractères accentués en caractères non-accentués
+            self.username = slugify(self.NomUser)
+        if not self.password:  # crée un nouveau mot de passe pour l'utilisateur s'il n'est pas définit
+            password = ''.join(secrets.choice(string.ascii_letters) for i in range(20))
+            self.set_password(password)
+            if self.email:  # envoie le mot de passe par mail à l'utilisateur
+                send_mail(
+                    "Création de compte utilisateur sur --Agent Deposit--",
+                    f"Votre mot de passe est : {password}.",
+                    "djofangulrich05@gmail.com",
+                    ["ulrich.feuyan@gmail.com"],  # adresse mail de l'utilisateur
+                    fail_silently=False,
+                )
+            print(password)
+        self.is_active = self.UserActif
+        if self.CodeProfil.CodeProfil == "ADMIN":  # accorder l'accès à l'admin django pour les profils ADMIN
+            self.is_staff = True
+            self.is_superuser = True
+        else:
+            self.is_staff = False
+            self.is_superuser = False
 
-            # Récupérer le groupe correspondant au profil de l'utilisateur
-            groupe, created = Group.objects.get_or_create(name=self.CodeProfil.CodeProfil)
+        super(Utilisateur, self).save(*args, **kwargs)
 
-            # Ajouter l'utilisateur au groupe
-            self.groups.add(groupe)
+        # Récupérer le groupe correspondant au profil de l'utilisateur
+        groupe, created = Group.objects.get_or_create(name=self.CodeProfil.CodeProfil)
 
-            # Appeler la méthode save de la classe parente pour enregistrer l'utilisateur dans la base de données
-            super().save(*args, **kwargs)
-        except:
-            pass
+        # Ajouter l'utilisateur au groupe correspondant à son profil
+        self.groups.add(groupe)
+
+        # Appeler la méthode save de la classe parente pour enregistrer l'utilisateur dans la base de données
+        super().save(*args, **kwargs)

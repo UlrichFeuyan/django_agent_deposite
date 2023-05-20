@@ -1,56 +1,85 @@
-from django.contrib import messages
-from django.conf import settings as django_settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import DetailView, CreateView, TemplateView
+import json
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
-from account.forms import LoginForm, RegisterForm
+from account.forms import RegisterForm, LoginForm
 from agent_deposit.models import Utilisateur
+from core.settings import LOGIN_REDIRECT_URL
+
+"""
+def login_user(request):
+    if request.POST:
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            CodeUser = form.cleaned_data['CodeUser']
+            password = form.cleaned_data['password']
+            print(f"{CodeUser} : {password}")
+            try:
+                print("before getting utilisateur")
+                utilisateur = Utilisateur.objects.get(CodeUser=CodeUser)
+                print(utilisateur)
+                if utilisateur:
+                    username = utilisateur.username
+                    print(username)
+                    print("before authentication")
+                    user = authenticate(username=username, password=password)
+                    print(user)
+                    if user is not None:
+                        if user.is_active:
+                            login(request, user)
+                            print("before redirection")
+                            return redirect(LOGIN_REDIRECT_URL)
+            except:
+                print("Aucun utilisateur trouvé")
+    else:
+        form = LoginForm()
+    return render(request, 'account/login.html', {'form': form})
 
 
-@login_required
-def redirect_user(request):
-    user_profile = request.user.CodeProfil.CodeProfil
-    try:
-        if user_profile == 'ADMIN':
-            return redirect('agent_deposit:admin_dashboard')
-        elif user_profile == 'CONTROL':
-            return redirect('agent_deposit:controller_dashboard')
-        elif user_profile == 'BACK':
-            return redirect('agent_deposit:back_office_dashboard')
-        elif user_profile == 'CAISSIER':
-            return redirect('agent_deposit:cashier_dashboard')
+class Login(View):
+    def get(self, request, *args, **kwargs):
+        form = LoginForm()
+        return render(request, 'account/login.html', locals())
+
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            CodeUser = form.cleaned_data['CodeUser']
+            password = form.cleaned_data['password']
+            print(f"{CodeUser} : {password}")
+            try:
+                utilisateur = Utilisateur.objects.get(CodeUser=CodeUser)
+                print(utilisateur)
+                if utilisateur:
+                    username = utilisateur.username
+                    print(username)
+                    user = authenticate(username=username, password=password)
+                    if user is not None:
+                        if user.is_active:
+                            login(request, user)
+                            return redirect('account:profil')
+            except:
+                print("Aucun utilisateur trouvé")
+                return redirect('account:login')
         else:
-            return redirect('agent_deposit:home')
-    except:
-        pass
+            print('formulaire incorrect')
+            return redirect('account:login')
+"""
 
 
 class Login(LoginView):
     form_class = LoginForm
     template_name = "account/login.html"
     redirect_authenticated_user = True
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        current_site = get_current_site(self.request)
-        context.update(
-            {
-                self.redirect_field_name: self.get_redirect_url(),
-                "site": current_site,
-                "site_name": current_site.name,
-                **(self.extra_context or {}),
-            }
-        )
-        return context
 
 
 class Register(View):
@@ -77,3 +106,75 @@ class ChangePassword(PasswordChangeView):
 def profil(request):
     context = {'user': request.user}
     return render(request, 'account/profil.html', context)
+
+
+@login_required
+def users(request):
+    return render(request, 'account/users.html')
+
+
+@login_required
+def user_list(request):
+    return render(request, 'account/user_list.html', {
+        'users': Utilisateur.objects.all(),
+    })
+
+
+@login_required
+def add_user(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "movieListChanged": None,
+                        "showMessage": f"{user.CodeUser} Ajouté."
+                    })
+                })
+    else:
+        form = RegisterForm()
+    return render(request, 'account/user_form.html', {
+        'form': form,
+    })
+
+
+@login_required
+def edit_user(request, pk):
+    user = get_object_or_404(Utilisateur, CodeUser=pk)
+    if request.method == "POST":
+        form = RegisterForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "movieListChanged": None,
+                        "showMessage": f"{user.CodeUser} Modifié."
+                    })
+                }
+            )
+    else:
+        form = RegisterForm(instance=user)
+    return render(request, 'account/user_form.html', {
+        'form': form,
+        'utilisateur': user,
+    })
+
+
+@login_required
+def remove_user(request, pk):
+    user = get_object_or_404(Utilisateur, CodeUser=pk)
+    user.UserActif = False
+    user.save()
+    return HttpResponse(
+        status=204,
+        headers={
+            'HX-Trigger': json.dumps({
+                "movieListChanged": None,
+                "showMessage": f"{user.CodeUser} Supprimé."
+            })
+        })

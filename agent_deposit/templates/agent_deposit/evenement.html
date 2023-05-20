@@ -51,13 +51,13 @@
                     <tbody>
                         {% for evenement in evenements %}
                             <tr>
-                                <th>{{evenement.IDevenements}}</th>
-                                <th>{{evenement.Msisdn.CodeAgent}}</th>
-                                <th>{{evenement.natOrig}}</th>
-                                <th>{{evenement.Msisdn.msisdn}}</th>
-                                <th>{{evenement.refOrig}}</th>
-                                <th>{{evenement.montant}}</th>
-                                <th>{{evenement.statutTrt}}</th>
+                                <td>{{evenement.IDevenements}}</td>
+                                <td>{{evenement.Msisdn.CodeAgent}}</td>
+                                <td>{{evenement.natOrig}}</td>
+                                <td>{{evenement.Msisdn.msisdn}}</td>
+                                <td>{{evenement.refOrig}}</td>
+                                <td>{{evenement.montant}}</td>
+                                <td>{{evenement.statutTrt}}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

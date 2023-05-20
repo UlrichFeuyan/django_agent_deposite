@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="fr">
-
     <head>
         <meta charset="utf-8">
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -47,7 +46,8 @@
                         <li class="nav-item"><img alt="logo de Mtn Mobile Money" src="{% static 'img/logoMtnMomo.png' %} "
                                                   width="230px"></li>
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                               data-toggle="dropdown"
                                href="#" id="searchDropdown" role="button">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
@@ -71,9 +71,10 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                               data-toggle="dropdown"
                                href="#" id="userDropdown" role="button">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{user.NomUser}} </span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{user.CodeUser}} </span>
                                 <img class="img-profile rounded-circle" src=" {% static 'img/undraw_profile.svg' %} ">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -131,11 +132,30 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à faire mettre fin à la session.</div>
+                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à faire mettre fin à la
+                    session.
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal" type="button">Annuler</button>
                     <a class="btn btn-primary" href="{% url 'account:logout' %}">Déconnexion</a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Placeholder for the modal -->
+    <div class="modal fade" id="modal">
+        <div class="modal-dialog" hx-target="this" id="dialog"></div>
+    </div>
+
+    <!-- Empty toast to show the message -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-white bg-success border-0" id="toast"
+             role="alert">
+            <div class="d-flex">
+                <div class="toast-body" id="toast-body"></div>
+                <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        type="button"></button>
             </div>
         </div>
     </div>
@@ -148,6 +168,18 @@
     <script src=" {% static 'vendor/jquery-easing/jquery.easing.min.js' %} "></script>
     <!-- Custom scripts for all pages-->
     <script src=" {% static 'js/sb-admin-2.min.js' %} "></script>
+    <script src=" {% static 'js/htmx.min.js' %} "></script>
+    <script src="{% static 'js/dialog.js' %}"></script>
+    <script src="{% static 'js/toast.js' %}"></script>
+    {% block scripts %}
+        <script>
+            function CopyText() {
+                var text = document.getElementById('yourtext')
+                text.select();
+                document.execCommand('copy')
+            }
+        </script>
+    {% endblock scripts %}
 
     {% block special_js %}
 

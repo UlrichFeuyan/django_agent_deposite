@@ -1,0 +1,13 @@
+{% for user in users %}
+  {% if user.UserActif %}
+    <tr id="movie-{{ user.pk }}" class="movie-row">
+      <td>{{ user.CodeUser }}</td>
+      <td>{{ user.NomUser }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.CodeProfil }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" hx-get="{% url 'account:edit_user' pk=user.CodeUser %}" hx-target="#dialog">Modifier</button>
+      </td>
+    </tr>
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Liste des Utilisateurs
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="px-5 my-5 text-center">
+        <h1>Utilisateurs de l'application</h1>
+        <p>Vous pouvez gérer les utilisateur à travers cette page.</p>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Code Utilisateur</th>
+            <th>Nom</th>
+            <th>E-mail</th>
+            <th>Profil</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody hx-trigger="load, movieListChanged from:body" hx-get="{% url 'account:user_list' %}" hx-target="this">
+          <tr>
+            <td class="spinner-border" role="status">
+              <span class="visually-hidden">..</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button hx-get="{% url 'account:add_user' %}" hx-target="#dialog" class="btn btn-primary">
+        Ajouter un utilisateur
+      </button>
+    </div>
+{% endblock %}
+
+{% block special_js %}
+    <script src="{% static 'js/dialog.js' %}"></script>
+    <script src="{% static 'js/toast.js' %}"></script>
+{% endblock special_js %}

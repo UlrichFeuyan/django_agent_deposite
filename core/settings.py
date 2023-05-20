@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'debug_toolbar',
 
+    'widget_tweaks',
+
     'account.apps.AccountConfig',
     'agent_deposit.apps.AgentDepositConfig',
 ]
@@ -98,9 +100,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+"""
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-"""
 DB_ENGINE = os.getenv('DB_ENGINE', None)
 DB_USERNAME = os.getenv('DB_USERNAME', None)
 DB_PASS = os.getenv('DB_PASS', None)
@@ -165,6 +167,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Site configuration
+
 USE_THOUSAND_SEPARATOR = True
 
 AUTH_USER_MODEL = 'agent_deposit.Utilisateur'
@@ -181,6 +185,13 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+# Email configuration
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '1025'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
 
 ####################################
 ##  CKEDITOR CONFIGURATION        ##
