@@ -1,11 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-    {{ user.username }} - Profil
+{{ user.username }} - Profil
 {% endblock %}
 
 {% block content %}
-    <h1>Login: {{ user.username }}</h1>
-    <h2>Profil: {{ user.CodeProfil }}</h2>
-    <!-- autres informations de profil -->
+<div class="container-fluid text-center" style="overflow-x: auto;">
+    <div class="px-5 my-5 text-center d-inline-block" style="min-width: 500px; max-width: 600px; padding: 0; margin: 0;">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ user.CodeUser }}</h6>
+            </div>
+            <div class="card-body text-center">
+                <img alt="photo de profil" class="d-inline-block" src="{% static 'img/photo_profil.png' %}" width="200px"/>
+                <table class="d-inline-block text-left m-4 p-3">
+                    <tr>
+                        <td class="px-2 mt-1 align-bottom"><b>NOM D'UTILISATEUR</b></td>
+                        <td class="align-bottom">&emsp;&emsp;{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-2 mt-1 align-bottom"><b>PROFIL</b></td>
+                        <td class="align-bottom">&emsp;&emsp;{{ user.CodeProfil }}</td>
+                    </tr>
+                    {% if user.email %}
+                    <tr>
+                        <td class="px-2 mt-1 align-bottom"><b>EMAIL</b></td>
+                        <td class="align-bottom">&emsp;&emsp;{{ user.email }}</td>
+                    </tr>
+                    {% endif %}
+                </table>
+                <div class="text-center d-inline-block" style="width: 300px;">
+                    <a class="btn btn-primary btn-user btn-block mt-4" href="{% url 'account:change_password' %}">Changer de mot de passe →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

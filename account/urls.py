@@ -16,6 +16,6 @@ urlpatterns = [
     path('users/user/<str:pk>/edit', edit_user, name='edit_user'),
 
     path('inscription/', Register.as_view(), name='register'),
-    path('changepassword/', ChangePassword.as_view(), name='change_password'),
+    path('change-password/', ChangePassword.as_view(), name='change_password'),
     path('logout/', LogoutView.as_view(), name='logout'),
 ]

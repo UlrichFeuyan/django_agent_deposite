@@ -3,14 +3,40 @@
 
 {% block title %}Virement Bancaire{% endblock title %}
 
-{% block special_css %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
-{% endblock special_css %}
 
-{% block special_js %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script src=" {% static 'js/international_phone_number.js' %} "></script>
-{% endblock special_js %}
+{% block special_css %}
+    <style>
+        .flag-input {
+            position: relative;
+        }
+
+        .flag-input input[type="text"] {
+            padding-left: 50px; /* Ajoutez un espace pour l'icône du drapeau et l'indicatif */
+        }
+
+        .flag-input .flag-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 20px;
+            background-image: url("{% static 'img/benin-flag.png' %}"); /* Chemin vers l'icône du drapeau */
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .flag-input .country-code {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: #777;
+            pointer-events: none; /* Empêche l'édition du texte */
+        }
+    </style>
+{% endblock special_css %}
 
 {% block content %}
     <!-- Page Heading -->
@@ -40,7 +66,11 @@
                                         </div>
                                         <div class="form-group col ml-3">
                                             <label for="id_tel">N° Téléphone</label><br />
-                                            <input type="text" class="form-control form-control-user" id="id_tel" placeholder="" name="telephone">
+                                            <div class="flag-input">
+                                                <span class="flag-icon"></span>
+                                                <span class="country-code">+229</span>
+                                                <input type="text" class="form-control form-control-user" id="id_tel" placeholder="" name="telephone" style="padding-left: 80px;">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">

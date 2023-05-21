@@ -11,7 +11,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 
-from account.forms import RegisterForm, LoginForm
+from account.forms import RegisterForm, LoginForm, ChangePasswordForm
 from agent_deposit.models import Utilisateur
 from core.settings import LOGIN_REDIRECT_URL
 
@@ -97,6 +97,7 @@ class Register(View):
 
 @method_decorator(login_required, name='dispatch')
 class ChangePassword(PasswordChangeView):
+    form_class = ChangePasswordForm
     template_name = "account/change-password.html"
     title = _("Modifier le mot de passe")
     success_url = reverse_lazy("account:profil")
