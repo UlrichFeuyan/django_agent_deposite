@@ -94,7 +94,21 @@ class Retrait(TemplateView, LoginRequiredMixin):
 @login_required
 def voucher(request):
     if request.method == "POST":
-        if not (request.POST.get('identifiant_receveur') or request.POST.get('num_cheque')):
+        """
+            - on vérifie que l'agent est bien actif
+
+            - on vérifie si l'agent est déjà enregistrer dans la base de donnnées
+
+                - si celui-ci est déjà enregistrer dans la base de donnnées, on recupère son instance pour réaliser l'opération
+                - sinon, on l'enregistre au préalable
+
+            - après avoir récupérer l'agent depuis la base de données on donne la possibilité de rappeller la vue du formulaire principal pour recupérer les autres informations
+
+            - Ayant collecter toutes les données, on fait appel à l'api pour générer le voucher 
+        """
+
+        # Cas du versement en espèce
+        if not (request.POST.get('identifiant_receveur') or request.POST.get('num_cheque')):  # vérifit que le formulaire correspond bien à celui du versement espece
             operateur = request.POST.get('operateur')
             telephone = request.POST.get('telephone')
 
@@ -134,6 +148,7 @@ def voucher(request):
                 # Rediriger vers une page de confirmation
             return render(request, 'agent_deposit/voucher.html', {'voucher': voucher})
 
+        # Cas du virement
         if request.POST.get('identifiant_receveur'):
             operateur = request.POST.get('operateur')
             telephone = request.POST.get('telephone')
@@ -181,6 +196,7 @@ def voucher(request):
                 # Rediriger vers une page de confirmation
                 return render(request, 'agent_deposit/voucher.html', {'voucher': voucher})
 
+        # Cas depot de la remise de cheque
         if request.POST.get('num_cheque'):
             operateur = request.POST.get('operateur')
             telephone = request.POST.get('telephone')

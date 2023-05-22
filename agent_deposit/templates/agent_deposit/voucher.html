@@ -15,7 +15,14 @@
     </div>
     <div class="modal-footer">
         <!-- Le bouton servant à copier le coupon -->
-        <button class="btn btn-secondary" hx-get="{{ request.path }}" type="button">Fermer</button>
+        <a class="btn btn-secondary" href="
+        {% if active_liquide %}
+                {% url 'agent_deposit:liquide' %}
+        {% elif active_virement %}
+                {% url 'agent_deposit:virement' %}
+        {% elif active_cheque %}
+                {% url 'agent_deposit:cheque' %}
+        {% endif %}" type="button">Fermer</a>
         <button class="btn btn-primary" onclick="copyToClipboard('#voucher')">Copier</button>
     </div>
 </form>
