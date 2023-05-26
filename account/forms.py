@@ -23,13 +23,13 @@ from agent_deposit.models import Utilisateur
 
 
 class LoginForm(AuthenticationForm):
-    username = UsernameField(max_length=255,
+    username = UsernameField(max_length=255, label=_("Nom d'utilisateur"),
                              widget=TextInput(
-                                 attrs={'name': 'user', 'id': 'user', 'placeholder': 'Nom d\'utilisateur',
+                                 attrs={'name': 'user', 'id': 'user', 'placeholder': 'BJ0OX',
                                         'class': 'form-control form-control-user', "autofocus": True}))
-    password = CharField(max_length=100,
+    password = CharField(max_length=100, label=_('Mot de passe'),
                                widget=PasswordInput(
-                                   attrs={'name': 'password', 'id': 'password', 'placeholder': 'Mot de passe',
+                                   attrs={'name': 'password', 'id': 'password', 'placeholder': '*************',
                                           'class': 'form-control form-control-user'}))
 
 

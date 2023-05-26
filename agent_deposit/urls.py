@@ -13,6 +13,7 @@ urlpatterns = [
     path('retrait/', Retrait.as_view(), name='retrait'),
     path('evenement/', Evenement.as_view(), name='evenement'),
     path('historique/', Historique.as_view(), name='historique'),
+    path('check_agent_account/', checkAgentAccount, name='check_agent_account'),
     path('voucher/', voucher, name='voucher'),
 
     path('404/', Error404.as_view(), name='404'),

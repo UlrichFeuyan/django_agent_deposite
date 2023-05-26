@@ -4,7 +4,7 @@
 {% block title %}Versement Espèce{% endblock title %}
 
 {% block special_css %}
-    <style>
+<style>
         .flag-input {
             position: relative;
         }
@@ -34,50 +34,58 @@
             color: #777;
             pointer-events: none; /* Empêche l'édition du texte */
         }
-    </style>
+
+
+</style>
 {% endblock special_css %}
 
 
 {% block content %}
-   <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Versement Espèce</h1>
-    <div class="row justify-content-center">
-        <div class="fixed" id="agentform" style="min-width: 400px;">
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-2">Indentification</h1>
-                                    <p class="mb-5">Veillez renseigner les informations de l'agent</p>
-                                </div>
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    <div class="form-row">
-                                        <div class="form-group col-4">
-                                            <label for="id_tel">Opérateur</label>
-                                            <select id="inputState" class="form-control" name="operateur">
-                                                <option selected>MTN</option>
-                                                <option>Orange</option>
-                                                <option>Moov</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col ml-3">
-                                            <label for="id_tel">N° Téléphone</label><br />
-                                            <div class="flag-input">
-                                                <span class="flag-icon"></span>
-                                                <span class="country-code">+229</span>
-                                                <input type="text" class="form-control form-control-user" id="id_tel" placeholder="" name="telephone" style="padding-left: 80px;">
-                                            </div>
+<!-- Page Heading -->
+<h1 class="h3 mb-4 text-gray-800">Versement Espèce</h1>
+<div class="row justify-content-center htmx-indicator" id="loader">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="fixed" id="agentform" style="min-width: 400px;">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-2">Indentification</h1>
+                                <p class="mb-5">Veillez renseigner les informations de l'agent</p>
+                            </div>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <label for="id_tel">Opérateur</label>
+                                        <select class="form-control" id="inputState" name="operateur">
+                                            <option selected>MTN</option>
+                                            <option>Orange</option>
+                                            <option>Moov</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col ml-3">
+                                        <label for="id_tel">N° Téléphone</label><br/>
+                                        <div class="flag-input">
+                                            <span class="flag-icon"></span>
+                                            <span class="country-code">+229</span>
+                                            <input class="form-control form-control-user" id="id_tel" name="telephone"
+                                                   placeholder="" style="padding-left: 80px;" type="text">
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-user btn-block mt-4 " hx-post="{% url 'agent_deposit:voucher' %}" hx-target="#dialog">Valider</button>
-                                </form>
-                                <hr>
-                                <div class="text-center">
                                 </div>
+                                <button class="btn btn-primary btn-user btn-block mt-4 " hx-indicator="#loader" hx-post="{% url 'agent_deposit:check_agent_account' %}" hx-target="#dialog">Valider</button>
+                            </form>
+                            <hr>
+                            <div class="text-center">
                             </div>
                         </div>
                     </div>
@@ -85,4 +93,5 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock content %}

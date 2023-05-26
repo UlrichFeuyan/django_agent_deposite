@@ -1,0 +1,38 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">msisdn : +{{ agent.msisdn }} </h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label class="form-label" for="CodeAgent">Code de l'agent</label>
+            <input class="form-control form-control-user" disabled id="CodeAgent" name="{{agent.CodeAgent}}"
+                   placeholder="voucher" type="text" value="{{agent.CodeAgent}}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="msisdn">MSISDN</label>
+            <input class="form-control form-control-user" disabled id="msisdn" name="{{agent.msisdn}}"
+                   placeholder="voucher" type="text" value="{{agent.msisdn}}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="NomAgent">Nom de l'agent</label>
+            <input class="form-control form-control-user" disabled id="NomAgent" name="{{agent.NomAgent}}"
+                   placeholder="voucher" type="text" value="{{agent.NomAgent}}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="AgentActif">Status</label>
+            <input class="form-control form-control-user" disabled id="AgentActif" name="{{agent.AgentActif}}"
+                   placeholder="voucher" type="text" value="{{agent.AgentActif}}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="typeTransaction">Type de transaction</label>
+            <input class="form-control form-control-user" disabled id="typeTransaction" name="{{agent.typeTransaction}}"
+                   placeholder="voucher" type="text" value="{{agent.typeTransaction}}">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-user btn-block mt-4 " hx-indicator="#loader" hx-post="{% url 'agent_deposit:voucher' %}" hx-target="#dialog">Valider</button>
+    </div>
+</div>

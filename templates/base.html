@@ -1,188 +1,183 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta content="IE=edge" http-equiv="X-UA-Compatible">
-        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-        <meta content="" name="description">
-        <meta content="" name="author">
-        <title>Agent Deposite - {% block title %}Home{% endblock title %}</title>
-        <!-- Custom fonts for this template-->
-        <link href="{% static 'img/favicon.png' %}" rel="icon" type="image/png">
-        <link href=" {% static 'vendor/fontawesome-free/css/all.min.css' %} " rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-              rel="stylesheet">
-        <!-- Custom styles for this template-->
-        {% block special_css %}
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <title>Agent Deposite - {% block title %}Home{% endblock title %}</title>
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'img/favicon.png' %}" rel="icon" type="image/png">
+    <link href=" {% static 'vendor/fontawesome-free/css/all.min.css' %} " rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- Custom styles for this template-->
+    {% block special_css %}
 
-        {% endblock special_css %}
-        <link href=" {% static 'css/sb-admin-2.min.css' %} " rel="stylesheet">
-        <link href=" {% static 'css/Arial_nova.css' %} " rel="stylesheet">
-        <link href=" {% static 'css/general_style.css' %} " rel="stylesheet">
-    </head>
-
-    <body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        {% include 'sidebar.html' %}
-        <!-- Content Wrapper -->
-        <div class="d-flex flex-column" id="content-wrapper">
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <img alt="logo" src="{% static 'img/logo_no_bg.png' %}" width="220px">
-                    </form>
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item"><img alt="logo de Mtn Mobile Money" src="{% static 'img/logoMtnMomo.png' %} "
-                                                  width="230px"></li>
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#" id="searchDropdown" role="button">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div aria-labelledby="searchDropdown"
-                                 class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input aria-describedby="basic-addon2" aria-label="Search"
-                                               class="form-control bg-light border-0 small" placeholder="Search for..."
-                                               type="text">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#" id="userDropdown" role="button">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{user.CodeUser}} </span>
-                                <img class="img-profile rounded-circle" src=" {% static 'img/undraw_profile.svg' %} ">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div aria-labelledby="userDropdown"
-                                 class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                                <a class="dropdown-item" href="{% url 'account:profil' %}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal" href="#">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Déconnexion
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- End of Topbar -->
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    {% block content %}
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Base</h1>
-                    {% endblock content %}
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2023</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-        </div>
-        <!-- End of Content Wrapper -->
-    </div>
-    <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="logoutModal" role="dialog"
-         tabindex="-1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Prêt à vous déconnecter ?</h5>
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à faire mettre fin à la
-                    session.
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Annuler</button>
-                    <a class="btn btn-primary" href="{% url 'account:logout' %}">Déconnexion</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Placeholder for the modal -->
-    <div class="modal fade" id="modal">
-        <div class="modal-dialog" hx-target="this" id="dialog"></div>
-    </div>
-
-    <!-- Empty toast to show the message -->
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-white bg-success border-0" id="toast"
-             role="alert">
-            <div class="d-flex">
-                <div class="toast-body" id="toast-body"></div>
-                <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        type="button"></button>
-            </div>
-        </div>
-    </div>
-    {% block modal %}
-    {% endblock modal %}
-    <!-- Bootstrap core JavaScript-->
-    <script src=" {% static 'vendor/jquery/jquery.min.js' %} "></script>
-    <script src=" {% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
-    <!-- Core plugin JavaScript-->
-    <script src=" {% static 'vendor/jquery-easing/jquery.easing.min.js' %} "></script>
-    <!-- Custom scripts for all pages-->
-    <script src=" {% static 'js/sb-admin-2.min.js' %} "></script>
+    {% endblock special_css %}
+    <link href=" {% static 'css/sb-admin-2.min.css' %} " rel="stylesheet">
+    <link href=" {% static 'css/Arial_nova.css' %} " rel="stylesheet">
+    <link href=" {% static 'css/general_style.css' %} " rel="stylesheet">
     <script src=" {% static 'js/htmx.min.js' %} "></script>
-    <script src="{% static 'js/dialog.js' %}"></script>
-    <script src="{% static 'js/toast.js' %}"></script>
-    {% block scripts %}
-        <script>
-            function CopyText() {
-                var text = document.getElementById('yourtext')
-                text.select();
-                document.execCommand('copy')
-            }
-        </script>
-    {% endblock scripts %}
 
-    {% block special_js %}
+</head>
 
-    {% endblock special_js %}
-    </body>
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+    {% include 'sidebar.html' %}
+    <!-- Content Wrapper -->
+    <div class="d-flex flex-column" id="content-wrapper">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- Sidebar Toggle (Topbar) -->
+                <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <!-- Topbar Search -->
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <img alt="logo" src="{% static 'img/logo_no_bg.png' %}" width="220px">
+                </form>
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item"><img alt="logo de Mtn Mobile Money" src="{% static 'img/logoMtnMomo.png' %} "
+                                              width="230px"></li>
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#" id="searchDropdown" role="button">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div aria-labelledby="searchDropdown"
+                             class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input aria-describedby="basic-addon2" aria-label="Search"
+                                           class="form-control bg-light border-0 small" placeholder="Search for..."
+                                           type="text">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <div class="topbar-divider d-none d-sm-block"></div>
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#" id="userDropdown" role="button">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{user.CodeUser}} </span>
+                            <img class="img-profile rounded-circle" src=" {% static 'img/undraw_profile.svg' %} ">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div aria-labelledby="userDropdown"
+                             class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                            <a class="dropdown-item" href="{% url 'account:profil' %}">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal" href="#">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Déconnexion
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                {% block content %}
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">Base</h1>
+                {% endblock content %}
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Your Website 2023</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!-- Logout Modal-->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="logoutModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Prêt à vous déconnecter ?</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à faire mettre fin à la
+                session.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Annuler</button>
+                <a class="btn btn-primary" href="{% url 'account:logout' %}">Déconnexion</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Placeholder for the modal -->
+<div class="modal fade" id="modal" role="status">
+    <div class="modal-dialog" hx-target="this" id="dialog" role="document"></div>
+</div>
+
+<!-- Empty toast to show the message -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div aria-atomic="true" aria-live="assertive" class="toast align-items-center text-white bg-success border-0"
+         id="toast"
+         role="alert">
+        <div class="d-flex">
+            <div class="toast-body" id="toast-body"></div>
+            <button aria-label="Close" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    type="button"></button>
+        </div>
+    </div>
+</div>
+
+{% block modal %}
+{% endblock modal %}
+<!-- Bootstrap core JavaScript-->
+<script src=" {% static 'vendor/jquery/jquery.min.js' %} "></script>
+<script src=" {% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+<!-- Core plugin JavaScript-->
+<script src=" {% static 'vendor/jquery-easing/jquery.easing.min.js' %} "></script>
+<!-- Custom scripts for all pages-->
+<script src=" {% static 'js/sb-admin-2.min.js' %} "></script>
+<script src="{% static 'js/dialog.js' %}"></script>
+<script src="{% static 'js/toast.js' %}"></script>
+
+{% block special_js %}
+
+{% endblock special_js %}
+
+</body>
 </html>
